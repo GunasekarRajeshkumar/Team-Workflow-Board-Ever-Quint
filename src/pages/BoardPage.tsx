@@ -74,3 +74,4 @@ export const BoardPage: React.FC<BoardPageProps> = ({
   );
 };
 
+
