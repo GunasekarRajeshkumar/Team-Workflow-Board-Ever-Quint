@@ -1,26 +1,33 @@
-import { useState, useEffect, useCallback } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { Toaster } from 'react-hot-toast';
-import type { Task, TaskFormData, TaskStatus } from './types/task';
-import { useStorage } from './hooks/useStorage';
-import { useFilters } from './hooks/useFilters';
-import { Layout } from './components/Layout/Layout';
-import { Dashboard } from './pages/Dashboard';
-import { BoardPage } from './pages/BoardPage';
-import { TaskForm } from './features/taskForm';
-import { Modal } from './components/ui/Modal';
-import { Button } from './components/ui/Button';
-import toast from 'react-hot-toast';
-import styles from './App.module.css';
+import { useState, useEffect, useCallback } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+import type { Task, TaskFormData, TaskStatus } from "./types/task";
+import { useStorage } from "./hooks/useStorage";
+import { useFilters } from "./hooks/useFilters";
+import { Layout } from "./components/Layout/Layout";
+import { Dashboard } from "./pages/Dashboard";
+import { BoardPage } from "./pages/BoardPage";
+import { TaskForm } from "./features/taskForm";
+import { Modal } from "./components/ui/Modal";
+import { Button } from "./components/ui/Button";
+import toast from "react-hot-toast";
+import styles from "./App.module.css";
 
 function generateId(): string {
   return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 }
 
 function App() {
-  const { tasks, isLoading, error: storageError, migrated, addTask, updateTask } =
-    useStorage();
-  const { filters, sort, updateFilters, updateSort, clearFilters } = useFilters();
+  const {
+    tasks,
+    isLoading,
+    error: storageError,
+    migrated,
+    addTask,
+    updateTask,
+  } = useStorage();
+  const { filters, sort, updateFilters, updateSort, clearFilters } =
+    useFilters();
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
@@ -28,7 +35,7 @@ function App() {
   // Show migration toast
   useEffect(() => {
     if (migrated) {
-      toast.success('Data migrated successfully to the latest version.');
+      toast.success("Data migrated successfully to the latest version.");
     }
   }, [migrated]);
 
@@ -37,12 +44,12 @@ function App() {
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       if (isDirty) {
         e.preventDefault();
-        e.returnValue = '';
+        e.returnValue = "";
       }
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
   }, [isDirty]);
 
   const handleCreateTask = useCallback(() => {
@@ -60,7 +67,7 @@ function App() {
   const handleCloseModal = useCallback(() => {
     if (isDirty) {
       const confirmed = window.confirm(
-        'You have unsaved changes. Are you sure you want to close?'
+        "You have unsaved changes. Are you sure you want to close?"
       );
       if (!confirmed) return;
     }
@@ -73,7 +80,7 @@ function App() {
     (formData: TaskFormData) => {
       if (selectedTask) {
         updateTask(selectedTask.id, formData);
-        toast.success('Task updated successfully!');
+        toast.success("Task updated successfully!");
       } else {
         const newTask: Task = {
           ...formData,
@@ -82,7 +89,7 @@ function App() {
           updatedAt: new Date().toISOString(),
         };
         addTask(newTask);
-        toast.success('Task created successfully!');
+        toast.success("Task created successfully!");
       }
       setIsModalOpen(false);
       setSelectedTask(null);
@@ -94,7 +101,7 @@ function App() {
   const handleStatusChange = useCallback(
     (id: string, status: TaskStatus) => {
       updateTask(id, { status });
-      toast.success('Task status updated!');
+      toast.success("Task status updated!");
     },
     [updateTask]
   );
@@ -116,15 +123,12 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/" element={<Layout tasks={tasks} onCreateTask={handleCreateTask} />}>
-          <Route
-            index
-            element={<Navigate to="/board" replace />}
-          />
-          <Route
-            path="dashboard"
-            element={<Dashboard tasks={tasks} />}
-          />
+        <Route
+          path="/"
+          element={<Layout tasks={tasks} onCreateTask={handleCreateTask} />}
+        >
+          <Route index element={<Navigate to="/board" replace />} />
+          <Route path="dashboard" element={<Dashboard tasks={tasks} />} />
           <Route
             path="board"
             element={
@@ -140,13 +144,14 @@ function App() {
               />
             }
           />
+          <Route path="*" element={<Navigate to="/board" replace />} />
         </Route>
       </Routes>
 
       <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
-        title={selectedTask ? 'Edit Task' : 'Create Task'}
+        title={selectedTask ? "Edit Task" : "Create Task"}
         size="md"
         footer={
           <>
@@ -169,24 +174,25 @@ function App() {
         toastOptions={{
           duration: 3000,
           style: {
-            background: '#fff',
-            color: '#2C3A50',
-            borderRadius: '8px',
-            boxShadow: '0 4px 6px -1px rgba(30, 42, 79, 0.1), 0 2px 4px -1px rgba(30, 42, 79, 0.06)',
-            padding: '12px 16px',
-            fontSize: '14px',
-            fontWeight: '500',
+            background: "#fff",
+            color: "#2C3A50",
+            borderRadius: "8px",
+            boxShadow:
+              "0 4px 6px -1px rgba(30, 42, 79, 0.1), 0 2px 4px -1px rgba(30, 42, 79, 0.06)",
+            padding: "12px 16px",
+            fontSize: "14px",
+            fontWeight: "500",
           },
           success: {
             iconTheme: {
-              primary: '#28C76F',
-              secondary: '#fff',
+              primary: "#28C76F",
+              secondary: "#fff",
             },
           },
           error: {
             iconTheme: {
-              primary: '#EA5455',
-              secondary: '#fff',
+              primary: "#EA5455",
+              secondary: "#fff",
             },
           },
         }}
