@@ -1,0 +1,159 @@
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  background: var(--color-section);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  border-right: 1px solid var(--color-border);
+}
+
+.sidebarHeader {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+}
+
+.closeButton {
+  display: none;
+  background: var(--color-section-alt);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--color-text);
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  transition: all var(--transition-base);
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 300;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.closeButton:hover {
+  background: var(--color-section);
+  border-color: var(--color-text);
+}
+
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+.closeIcon {
+  display: block;
+  font-size: 1.75rem;
+  font-weight: 300;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.nav {
+  padding: 1rem 0;
+  flex: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  color: var(--color-text-light);
+  text-decoration: none;
+  transition: all var(--transition-base);
+  border-left: 2px solid transparent;
+  font-size: 0.9375rem;
+}
+
+.navItem:hover {
+  background: var(--color-section-alt);
+  color: var(--color-text);
+}
+
+.navItem.active {
+  background: var(--color-section-alt);
+  color: var(--color-text);
+  border-left-color: var(--color-text);
+  font-weight: 500;
+}
+
+.navLabel {
+  font-size: 0.9375rem;
+}
+
+.createButtonSection {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.createButton {
+  width: 100%;
+  justify-content: center;
+}
+
+.statusSection {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.statusTitle {
+  margin: 0 0 1rem 0;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-light);
+  font-weight: 600;
+}
+
+.statusItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0;
+  color: var(--color-text);
+  font-size: 0.875rem;
+}
+
+.statusLabel {
+  flex: 1;
+}
+
+.statusCount {
+  background: var(--color-background);
+  padding: 0.25rem 0.625rem;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.75rem;
+  min-width: 28px;
+  text-align: center;
+  border: 1px solid var(--color-border);
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 280px;
+  }
+
+  .closeButton {
+    display: flex;
+  }
+}

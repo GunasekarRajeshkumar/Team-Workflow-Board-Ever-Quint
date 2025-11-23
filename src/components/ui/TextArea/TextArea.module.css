@@ -1,0 +1,54 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.textarea::placeholder {
+  color: var(--color-text-light);
+}
+
+.textarea:disabled {
+  background-color: var(--color-section);
+  cursor: not-allowed;
+}
+
+.textareaError {
+  border-color: var(--color-text);
+}
+
+.textareaError:focus {
+  border-color: var(--color-text);
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.error {
+  font-size: 0.8125rem;
+  color: var(--color-text);
+}
